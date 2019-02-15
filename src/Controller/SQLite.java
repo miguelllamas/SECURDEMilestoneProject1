@@ -107,6 +107,28 @@ public class SQLite {
 
     //tadhg here
 
+    //kinda weird, not sure if good implementation hahaha. Will change later on if its really bad.
+    public int countUsers(){
+        
+        String sql = "SELECT id, username, password, role FROM users";
+        ArrayList<User> users = new ArrayList<User>();
+        
+        try (Connection conn = DriverManager.getConnection(driverURL);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)){
+            
+            while (rs.next()) {
+                users.add(new User(rs.getInt("id"),
+                                   rs.getString("username"),
+                                   rs.getString("password"),
+                                   rs.getInt("role")));
+            
+            }
+        } catch (Exception ex) {}
+        
+        return users.size();
+    }
+    
     //end tadhg here
 
     //miggy here

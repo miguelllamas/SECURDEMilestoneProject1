@@ -72,12 +72,14 @@ public class Main {
         // Create users table if not exist
         sqlite.createUserTable();
         
-        // Add users
-        sqlite.addUser("admin", "qwerty1234" , 5);
-        sqlite.addUser("manager", "qwerty1234", 4);
-        sqlite.addUser("staff", "qwerty1234", 3);
-        sqlite.addUser("client1", "qwerty1234", 2);
-        sqlite.addUser("client2", "qwerty1234", 2);
+        // Add users with hashed passwords
+        String password = encryptThisString("qwerty1234");
+        
+        sqlite.addUser("admin", password , 5);
+        sqlite.addUser("manager", password, 4);
+        sqlite.addUser("staff", password, 3);
+        sqlite.addUser("client1", password, 2);
+        sqlite.addUser("client2", password, 2);
         
         // Get users
         ArrayList<User> users = sqlite.getUsers();

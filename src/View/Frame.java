@@ -1,9 +1,11 @@
 package View;
 
 import Controller.Main;
+import Model.User;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import javax.swing.WindowConstants;
 
 public class Frame extends javax.swing.JFrame {
@@ -255,8 +257,31 @@ public class Frame extends javax.swing.JFrame {
     //end lucia here
 
     //tadhg here
-    public void checkLoginCredentials(){
-
+    
+    //function for checking if account actually exists and if credentials are correct
+    //using char[] because jPasswordFields only have the function .getPassword which returns char[]
+    public boolean checkLoginCredentials(String username, String password){
+        
+        //get list of all users to compare input with credentials
+        ArrayList<User> users = main.sqlite.getUsers();
+        
+        //loop through all the users to compare credentials
+        for(User user : users){
+            //first check if username is the same
+            if(user.getUsername().equals(username)){
+                //once the username is found, compare the hashed passwords
+                if(user.getPassword().equals(main.encryptThisString(password))){
+                    //if password is the same, then credentials are good
+                    return true;
+                }else{
+                    //if username is the same but password is wrong, then user inputted the wrong password
+                    return false;
+                }
+            }
+        }
+        
+        //if inputted username does not match with any of the usernames in the db, then user does not exist
+        return false;
     }
 
     //end tadhg here
