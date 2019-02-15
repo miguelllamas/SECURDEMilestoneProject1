@@ -249,7 +249,22 @@ public class Frame extends javax.swing.JFrame {
     public void registerAction(String username, String password, String confpass){
         main.sqlite.addUser(username, main.encryptThisString(password));
     }
+    
+    //lucia here
+        
+    //end lucia here
 
+    //tadhg here
+    public void checkLoginCredentials(){
+
+    }
+
+    //end tadhg here
+
+    //miggy here
+
+    //end miggy here
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Container;
     private javax.swing.JPanel Content;
