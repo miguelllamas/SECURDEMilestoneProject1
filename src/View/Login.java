@@ -101,9 +101,24 @@ public class Login extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String pass = new String(jPasswordField1.getPassword());
         
+        //if login credentials are valid
         if(frame.checkLoginCredentials(jTextField1.getText(), pass)){
-            frame.mainNav();
+            //depending on role, show the corresponding home
+            switch(frame.getRole(jTextField1.getText())){
+                case 0: break;
+                case 1: break;
+                case 2: frame.clientHome();
+                        break;
+                case 3: frame.staffHome();
+                        break;
+                case 4: frame.managerHome();
+                        break;
+                case 5: frame.adminHome();
+                        break;
+            }
         }
+        
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

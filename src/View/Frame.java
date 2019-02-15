@@ -6,6 +6,8 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.WindowConstants;
 
 public class Frame extends javax.swing.JFrame {
@@ -22,11 +24,7 @@ public class Frame extends javax.swing.JFrame {
         HomePnl = new javax.swing.JPanel();
         Content = new javax.swing.JPanel();
         Navigation = new javax.swing.JPanel();
-        adminBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        managerBtn = new javax.swing.JButton();
-        staffBtn = new javax.swing.JButton();
-        clientBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -48,50 +46,10 @@ public class Frame extends javax.swing.JFrame {
 
         Navigation.setBackground(new java.awt.Color(204, 204, 204));
 
-        adminBtn.setBackground(new java.awt.Color(250, 250, 250));
-        adminBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        adminBtn.setText("Admin Home");
-        adminBtn.setFocusable(false);
-        adminBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adminBtnActionPerformed(evt);
-            }
-        });
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("SECURITY Svcs");
         jLabel1.setToolTipText("");
-
-        managerBtn.setBackground(new java.awt.Color(250, 250, 250));
-        managerBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        managerBtn.setText("Manager Home");
-        managerBtn.setFocusable(false);
-        managerBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                managerBtnActionPerformed(evt);
-            }
-        });
-
-        staffBtn.setBackground(new java.awt.Color(250, 250, 250));
-        staffBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        staffBtn.setText("Staff Home");
-        staffBtn.setFocusable(false);
-        staffBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                staffBtnActionPerformed(evt);
-            }
-        });
-
-        clientBtn.setBackground(new java.awt.Color(250, 250, 250));
-        clientBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        clientBtn.setText("Client Home");
-        clientBtn.setFocusable(false);
-        clientBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clientBtnActionPerformed(evt);
-            }
-        });
 
         logoutBtn.setBackground(new java.awt.Color(250, 250, 250));
         logoutBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -110,11 +68,7 @@ public class Frame extends javax.swing.JFrame {
             .addGroup(NavigationLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(NavigationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(adminBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-                    .addComponent(managerBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(staffBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(clientBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logoutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -123,15 +77,7 @@ public class Frame extends javax.swing.JFrame {
             .addGroup(NavigationLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(adminBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(managerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(staffBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(clientBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 382, Short.MAX_VALUE)
                 .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -180,22 +126,6 @@ public class Frame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void adminBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminBtnActionPerformed
-        contentView.show(Content, "adminHomePnl");
-    }//GEN-LAST:event_adminBtnActionPerformed
-
-    private void managerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managerBtnActionPerformed
-        contentView.show(Content, "managerHomePnl");
-    }//GEN-LAST:event_managerBtnActionPerformed
-
-    private void staffBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffBtnActionPerformed
-        contentView.show(Content, "staffHomePnl");
-    }//GEN-LAST:event_staffBtnActionPerformed
-
-    private void clientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientBtnActionPerformed
-        contentView.show(Content, "clientHomePnl");
-    }//GEN-LAST:event_clientBtnActionPerformed
-
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
         frameView.show(Container, "loginPnl");
     }//GEN-LAST:event_logoutBtnActionPerformed
@@ -240,6 +170,26 @@ public class Frame extends javax.swing.JFrame {
         frameView.show(Container, "homePnl");
     }
     
+    public void adminHome(){
+        frameView.show(Container, "homePnl");
+        contentView.show(Content, "adminHomePnl");
+    }
+    
+    public void managerHome(){
+        frameView.show(Container, "homePnl");
+        contentView.show(Content, "managerHomePnl");
+    }
+    
+    public void staffHome(){
+        frameView.show(Container, "homePnl");
+        contentView.show(Content, "staffHomePnl");
+    }
+    
+    public void clientHome(){
+        frameView.show(Container, "homePnl");
+        contentView.show(Content, "clientHomePnl");
+    }
+    
     public void loginNav(){
         frameView.show(Container, "loginPnl");
     }
@@ -252,7 +202,71 @@ public class Frame extends javax.swing.JFrame {
         main.sqlite.addUser(username, main.encryptThisString(password));
     }
     
+    
     //lucia here
+    public boolean containsNumber(String s){
+        Pattern p = Pattern.compile("[0-9]");
+        Matcher m = p.matcher(s);
+
+        return m.find();
+    }
+    
+    public boolean containsUpperCase(String s){
+        Pattern p = Pattern.compile("[A-Z]");
+        Matcher m = p.matcher(s);
+
+        return m.find();
+    }
+    
+    public boolean containsSpecial(String s){
+        Pattern p = Pattern.compile("[^A-Za-z0-9]");
+        Matcher m = p.matcher(s);
+
+        return m.find();
+    }
+    
+    public boolean checkIfUserExists(String username){
+             //get list of all users to compare input with credentials
+        ArrayList<User> users = main.sqlite.getUsers();
+        
+        //loop through all the users to compare credentials
+        for(User user : users){
+            //first check if username already exists
+            if(user.getUsername().equals(username)){
+                return true;
+            }
+        }
+        
+        //if inputted username does not match with any of the usernames in the db, then user does not exist yet
+        return false;   
+    }
+    
+    public boolean checkPassword(String password){ //check if password contains correct characters
+        if(containsNumber(password) && 
+           containsUpperCase(password) && 
+           containsSpecial(password)){
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public int getRole(String username){
+        //get list of all users to compare input with credentials
+        ArrayList<User> users = main.sqlite.getUsers();
+        
+        //loop through all the users to compare credentials
+        for(User user : users){
+            //first check if username is the same
+            if(user.getUsername().equals(username)){
+                //return role number
+                return user.getRole();
+            }
+        }
+        
+        //if inputted username does not match with any of the usernames in the db, then user does not exist
+        return 0;
+    }
         
     //end lucia here
 
@@ -295,11 +309,7 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JPanel Content;
     private javax.swing.JPanel HomePnl;
     private javax.swing.JPanel Navigation;
-    private javax.swing.JButton adminBtn;
-    private javax.swing.JButton clientBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton logoutBtn;
-    private javax.swing.JButton managerBtn;
-    private javax.swing.JButton staffBtn;
     // End of variables declaration//GEN-END:variables
 }
