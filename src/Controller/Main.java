@@ -1,14 +1,11 @@
 package Controller;
 
-
 import Model.User;
 import View.Frame;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-
-
 
 public class Main {
     
@@ -44,7 +41,19 @@ public class Main {
         catch (NoSuchAlgorithmException e) { 
             throw new RuntimeException(e); 
         } 
-    } 
+    }
+    
+    //lucia here
+        
+    //end lucia here
+
+    //tadhg here
+
+    //end tadhg here
+
+    //miggy here
+
+    //end miggy here
     
     public static void main(String[] args) {
         new Main().init();
@@ -78,6 +87,18 @@ public class Main {
             System.out.println(" Password: " + users.get(nCtr).getPassword());
             System.out.println(" Role: " + users.get(nCtr).getRole());
         }
+        
+        //lucia here
+        
+        //end lucia here
+        
+        //tadhg here
+        
+        //end tadhg here
+        
+        //miggy here
+        
+        //end miggy here
         
         // Initialize User Interface
         Frame frame = new Frame();

@@ -5,10 +5,34 @@ public class User {
     private String username;
     private String password;
     private int role;
+    
+    //lucia here
+        
+    //end lucia here
+
+    //tadhg here
+
+    //end tadhg here
+
+    //miggy here
+
+    //end miggy here
 
     public User(String username, String password){
         this.username = username;
         this.password = password;
+        
+        //lucia here
+        
+        //end lucia here
+
+        //tadhg here
+
+        //end tadhg here
+
+        //miggy here
+
+        //end miggy here
     }
     
     public User(int id, String username, String password, int role){
@@ -16,6 +40,18 @@ public class User {
         this.username = username;
         this.password = password;
         this.role = role;
+        
+        //lucia here
+        
+        //end lucia here
+
+        //tadhg here
+
+        //end tadhg here
+
+        //miggy here
+
+        //end miggy here
     }
     
     public int getId() {
@@ -49,4 +85,16 @@ public class User {
     public void setRole(int role) {
         this.role = role;
     }
+    
+    //lucia here
+        
+    //end lucia here
+
+    //tadhg here
+
+    //end tadhg here
+
+    //miggy here
+
+    //end miggy here
 }
