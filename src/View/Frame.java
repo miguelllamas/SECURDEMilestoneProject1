@@ -130,6 +130,7 @@ public class Frame extends javax.swing.JFrame {
         //clear input fields of loginPnl when going back to login screen
         loginPnl.setJTextField1TextEmpty();
         loginPnl.setJPasswordFieldTextEmpty();
+        loginPnl.setJLabel2Empty();
         frameView.show(Container, "loginPnl");
     }//GEN-LAST:event_logoutBtnActionPerformed
 
@@ -198,6 +199,7 @@ public class Frame extends javax.swing.JFrame {
     }
     
     public void registerNav(){
+        registerPnl.setJLabel2Empty();
         frameView.show(Container, "registerPnl");
     }
     
