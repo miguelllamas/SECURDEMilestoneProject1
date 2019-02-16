@@ -12,6 +12,18 @@ public class Register extends javax.swing.JPanel {
     public void setJLabel2Empty(){
         jLabel2.setText("");
     }
+    
+    public void setPasswordEmpty(){
+        password.setText("");
+    }
+    
+    public void setConfPassEmpty(){
+        confpass.setText("");
+    }
+        
+    public void setUsernameEmpty(){
+        username.setText("");
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

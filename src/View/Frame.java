@@ -200,6 +200,9 @@ public class Frame extends javax.swing.JFrame {
     
     public void registerNav(){
         registerPnl.setJLabel2Empty();
+        registerPnl.setPasswordEmpty();
+        registerPnl.setConfPassEmpty();
+        registerPnl.setUsernameEmpty();
         frameView.show(Container, "registerPnl");
     }
     
