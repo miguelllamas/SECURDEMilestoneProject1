@@ -137,7 +137,7 @@ public class Register extends javax.swing.JPanel {
                     jLabel2.setText("Password Mismatch");
                 }
             }else{
-                jLabel2.setText("Password must contain at least 1 uppecase letter, lowercase letter, number, and special character");
+                jLabel2.setText("Password must contain at least 1 uppercase letter, lowercase letter, number, and special character");
             }
         }else{
             jLabel2.setText("Username alreaedy exists");
