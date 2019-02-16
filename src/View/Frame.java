@@ -127,6 +127,9 @@ public class Frame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
+        //clear input fields of loginPnl when going back to login screen
+        loginPnl.setJTextField1TextEmpty();
+        loginPnl.setJPasswordFieldTextEmpty();
         frameView.show(Container, "loginPnl");
     }//GEN-LAST:event_logoutBtnActionPerformed
 

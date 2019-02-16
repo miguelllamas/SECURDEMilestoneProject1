@@ -101,7 +101,7 @@ public class Register extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(frame.checkIfUserExists(username.getText().toString()) == false){ //only allow registration if username doesn't exist
+        if(frame.checkIfUserExists(username.getText().toString().toLowerCase()) == false){ //only allow registration if username doesn't exist
             if(frame.checkPassword(password.getText())){ //only accept passwords w 1 uppercase, 1 number, 1 special char
                 if(password.getText().equals(confpass.getText())){
                     frame.registerAction(username.getText(), password.getText(), confpass.getText());

@@ -8,6 +8,14 @@ public class Login extends javax.swing.JPanel {
     public Login() {
         initComponents();
     }
+    
+    public void setJTextField1TextEmpty(){
+        jTextField1.setText("");
+    }
+    
+    public void setJPasswordFieldTextEmpty(){
+        jPasswordField1.setText("");
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
