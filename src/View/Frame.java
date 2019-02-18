@@ -2,6 +2,7 @@ package View;
 
 import Controller.Main;
 import Model.User;
+import Model.Attempt;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
@@ -208,8 +209,7 @@ public class Frame extends javax.swing.JFrame {
     
     public void registerAction(String username, String password, String confpass){
         main.sqlite.addUser(username, main.encryptThisString(password));
-    }
-    
+    }    
     
     //lucia here
     public boolean containsNumber(String s){
@@ -286,18 +286,43 @@ public class Frame extends javax.swing.JFrame {
         
         //get list of all users to compare input with credentials
         ArrayList<User> users = main.sqlite.getUsers();
+        ArrayList<Attempt> attempts = main.sqlite.getAttempts();
         
         //loop through all the users to compare credentials
         for(User user : users){
             //first check if username is the same
             if(user.getUsername().equals(username)){
                 //once the username is found, compare the hashed passwords
-                if(user.getPassword().equals(main.encryptThisString(password))){
-                    //if password is the same, then credentials are good
-                    return true;
-                }else{
-                    //if username is the same but password is wrong, then user inputted the wrong password
-                    return false;
+                
+                if(user.getLockStatus() == 0) {                    
+                    if(user.getPassword().equals(main.encryptThisString(password))){
+                        //if password is the same, then credentials are good                        
+                        for(Attempt attempt : attempts) {
+                            if(attempt.getId() == user.getId()) {
+                                main.sqlite.resetAttempts(user.getUsername());
+                                break;
+                            }
+                        }                                                
+                        return true;
+                    } else{
+                        //if username is the same but password is wrong, then user inputted the wrong password
+                        for(Attempt attempt : attempts) {
+                            if(attempt.getId() == user.getId()) {
+                                if(attempt.getTrackedFailedAttempts() == 5) {
+                                    main.sqlite.changeLockStatus(user.getUsername(), 1);
+                                    System.out.println("LOCKED ACCOUNT");
+                                }
+                                else {
+                                    main.sqlite.addFailedAttempt(username);
+                                }
+                                break;
+                            }
+                        }                    
+                        return false;
+                    }
+                }
+                else {
+                    // Locked!
                 }
             }
         }

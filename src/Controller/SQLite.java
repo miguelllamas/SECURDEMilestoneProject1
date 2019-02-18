@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.User;
+import Model.Attempt;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -26,7 +27,8 @@ public class SQLite {
             + " id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
             + " username TEXT NOT NULL,\n"
             + " password TEXT NOT NULL,\n"
-            + " role INTEGER DEFAULT 2\n"
+            + " role INTEGER DEFAULT 2,\n"
+            + " lockStatus INTEGER DEFAULT 0\n"
             + ");";
 
         try (Connection conn = DriverManager.getConnection(driverURL);
@@ -71,6 +73,7 @@ public class SQLite {
         try (Connection conn = DriverManager.getConnection(driverURL);
             Statement stmt = conn.createStatement()){
             stmt.execute(sql);
+            addAttempts();
             
 //  For this activity, we would not be using prepared statements first.
 //      String sql = "INSERT INTO users(username,password) VALUES(?,?)";
@@ -82,13 +85,14 @@ public class SQLite {
     }
     
     public void addUser(String username, String password, int role) {
-        String sql = "INSERT INTO users(username,password,role) VALUES('" + username + "','" + password + "','" + role + "')";
+        String sql = "INSERT INTO users(username,password,role) VALUES('" + username + "','" + password + "','" + role + "')";        
         
         try (Connection conn = DriverManager.getConnection(driverURL);
             Statement stmt = conn.createStatement()){
             stmt.execute(sql);
+            addAttempts();
             
-        } catch (Exception ex) {}
+        } catch (Exception ex) {}        
     }
     
     public void removeUser(String username) {
@@ -132,6 +136,98 @@ public class SQLite {
     //end tadhg here
 
     //miggy here
+    public void createAttemptsTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS attempts (\n"
+            + " id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+            + " trackedFailedAttempts INTEGER DEFAULT 0\n"
+            + ");";
+
+        try (Connection conn = DriverManager.getConnection(driverURL);
+            Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+            System.out.println("Table attempts in database.db created.");
+        } catch (Exception ex) {}
+    }
+    
+    public void dropAttemptsTable() {
+        String sql = "DROP TABLE attempts;";
+
+        try (Connection conn = DriverManager.getConnection(driverURL);
+            Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+            System.out.println("Table attempts in database.db dropped.");
+        } catch (Exception ex) {}
+    }
+    
+    public void addAttempts() {
+        String sql = "INSERT INTO attempts DEFAULT VALUES";
+        
+        try (Connection conn = DriverManager.getConnection(driverURL);
+            Statement stmt = conn.createStatement()){
+            stmt.execute(sql);
+            
+        } catch (Exception ex) {
+            System.out.println("did this happen?");
+        }
+    }
+    
+    public ArrayList<Attempt> getAttempts(){
+        String sql = "SELECT id, trackedFailedAttempts FROM attempts";
+        ArrayList<Attempt> attempts = new ArrayList<Attempt>();
+        
+        try (Connection conn = DriverManager.getConnection(driverURL);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)){
+            
+            while (rs.next()) {
+                attempts.add(new Attempt(rs.getInt("id"),
+                                   rs.getInt("trackedFailedAttempts")));
+            
+            }
+        } catch (Exception ex) {}
+        return attempts;
+    }
+    
+    public void addFailedAttempt(String username) {  
+        String sql = "UPDATE attempts\n"
+                + "SET trackedFailedAttempts = trackedFailedAttempts + 1\n"
+                + "WHERE id IN\n"
+                + "(SELECT id FROM users WHERE username = '" + username + "');";
+        
+        try (Connection conn = DriverManager.getConnection(driverURL);
+            Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+            System.out.println("Failed attempts for " + username + " updated.");
+        } catch (Exception ex) {
+        }
+    }
+    
+    public void resetAttempts(String username) {  
+        String sql = "UPDATE attempts\n"
+                + "SET trackedFailedAttempts = '0'\n"
+                + "WHERE id IN\n"
+                + "(SELECT id FROM users WHERE username = '" + username + "');";
+        
+        try (Connection conn = DriverManager.getConnection(driverURL);
+            Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+            System.out.println("Reset attempts for " + username + ".");
+        } catch (Exception ex) {
+        }
+    }
+    
+    public void changeLockStatus(String username, int x) {  
+        String sql = "UPDATE users\n"
+                + "SET lockStatus = '" + x + "'\n"
+                + "WHERE username = '" + username + "';";
+        
+        try (Connection conn = DriverManager.getConnection(driverURL);
+            Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+            System.out.println("Lock status for " + username + " updated.");
+        } catch (Exception ex) {
+        }
+    }
 
     //end miggy here
     

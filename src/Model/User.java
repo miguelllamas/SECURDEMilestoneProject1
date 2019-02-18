@@ -5,6 +5,7 @@ public class User {
     private String username;
     private String password;
     private int role;
+    private int lockStatus;
     
     //lucia here
         
@@ -84,6 +85,14 @@ public class User {
 
     public void setRole(int role) {
         this.role = role;
+    }
+    
+    public int getLockStatus() {
+        return lockStatus;
+    }
+
+    public void setLockStatus(int lockStatus) {
+        this.lockStatus = lockStatus;
     }
     
     //lucia here

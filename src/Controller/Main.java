@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.User;
+import Model.Attempt;
 import View.Frame;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -66,16 +67,18 @@ public class Main {
         // Create a database
         sqlite.createNewDatabase();
         
-        // Drop users table if needed
+        // Drop users and attempts table if needed
         sqlite.dropUserTable();
+        sqlite.dropAttemptsTable();
         
-        // Create users table if not exist
+        // Create users and attempts table if not existing
         sqlite.createUserTable();
+        sqlite.createAttemptsTable();
         
         // Add users with hashed passwords
         String password = encryptThisString("qwerty1234");
         
-        sqlite.addUser("admin", password , 5);
+        sqlite.addUser("admin", password, 5);
         sqlite.addUser("manager", password, 4);
         sqlite.addUser("staff", password, 3);
         sqlite.addUser("client1", password, 2);
@@ -99,6 +102,12 @@ public class Main {
         //end tadhg here
         
         //miggy here
+        ArrayList<Attempt> attempts = sqlite.getAttempts();
+        System.out.println(attempts.size());
+        for(int nCtr = 0; nCtr < attempts.size(); nCtr++){
+            System.out.println("===== Attempts for User " + attempts.get(nCtr).getId() + " =====");
+            System.out.println(" Tracked failed attempts: " + attempts.get(nCtr).getTrackedFailedAttempts());
+        }
         
         //end miggy here
         
