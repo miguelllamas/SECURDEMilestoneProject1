@@ -5,6 +5,7 @@ import Model.Attempt;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -91,6 +92,8 @@ public class SQLite {
             Statement stmt = conn.createStatement()){
             stmt.execute(sql);
             addAttempts();
+            //for testing if addingLogs works
+            //addLogs("test", "now");
             
         } catch (Exception ex) {}        
     }
@@ -131,6 +134,42 @@ public class SQLite {
         } catch (Exception ex) {}
         
         return users.size();
+    }
+    
+    public void createLogsTable(){
+        String sql = "CREATE TABLE IF NOT EXISTS logs (\n"
+                + " id INTEGER PRIMARY KEY AUTOINCREMENT, \n"
+                + " message STRING DEFAULT '', \n"
+                + " time STRING DEFAULT ''\n"
+                + ");";
+        
+        try (Connection conn = DriverManager.getConnection(driverURL);
+            Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+            System.out.println("Table logs in database.db created.");
+        } catch (Exception ex) {}
+    }
+    
+    public void dropLogsTable(){
+        String sql = "DROP TABLE logs;";
+
+        try (Connection conn = DriverManager.getConnection(driverURL);
+            Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+            System.out.println("Table logs in database.db dropped.");
+        } catch (Exception ex) {}
+    }
+    
+    public void addLogs(String msg, String time) {
+        String sql = "INSERT INTO logs(message, time) VALUES ('"+msg+"', '"+time+"');";
+        
+        try (Connection conn = DriverManager.getConnection(driverURL);
+            Statement stmt = conn.createStatement()){
+            System.out.println("inside addLogs");
+            stmt.execute(sql);
+            
+        } catch (Exception ex) {
+        }
     }
     
     //end tadhg here

@@ -70,10 +70,12 @@ public class Main {
         // Drop users and attempts table if needed
         sqlite.dropUserTable();
         sqlite.dropAttemptsTable();
+        sqlite.dropLogsTable();
         
         // Create users and attempts table if not existing
         sqlite.createUserTable();
         sqlite.createAttemptsTable();
+        sqlite.createLogsTable();
         
         // Add users with hashed passwords
         String password = encryptThisString("qwerty1234");
