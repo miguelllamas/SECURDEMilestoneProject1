@@ -93,7 +93,7 @@ public class SQLite {
             stmt.execute(sql);
             addAttempts();
             //for testing if addingLogs works
-            addLogs(1, "test", "now");
+            //addLogs(1, "test", "now");
             
         } catch (Exception ex) {}        
     }

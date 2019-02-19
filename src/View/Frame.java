@@ -6,7 +6,9 @@ import Model.Attempt;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.WindowConstants;
@@ -305,6 +307,11 @@ public class Frame extends javax.swing.JFrame {
                         }                                                
                         return true;
                     } else{
+                        //for the logging
+                        String date = "" + LocalDateTime.now();
+                        
+                        main.sqlite.addLogs(user.getId(), "Attempted Login", date);
+                        
                         //if username is the same but password is wrong, then user inputted the wrong password
                         for(Attempt attempt : attempts) {
                             if(attempt.getId() == user.getId()) {

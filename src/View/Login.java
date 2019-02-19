@@ -143,7 +143,7 @@ public class Login extends javax.swing.JPanel {
         }
         else{
             //Invalid login credentials
-           jLabel2.setText("Invalid Credentials");
+            jLabel2.setText("Invalid Credentials");
         }
         
         
