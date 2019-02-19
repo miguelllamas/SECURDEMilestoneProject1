@@ -93,7 +93,7 @@ public class SQLite {
             stmt.execute(sql);
             addAttempts();
             //for testing if addingLogs works
-            //addLogs("test", "now");
+            addLogs(1, "test", "now");
             
         } catch (Exception ex) {}        
     }
@@ -139,6 +139,7 @@ public class SQLite {
     public void createLogsTable(){
         String sql = "CREATE TABLE IF NOT EXISTS logs (\n"
                 + " id INTEGER PRIMARY KEY AUTOINCREMENT, \n"
+                + " user INTEGER DEFAULT 0, \n"
                 + " message STRING DEFAULT '', \n"
                 + " time STRING DEFAULT ''\n"
                 + ");";
@@ -160,8 +161,8 @@ public class SQLite {
         } catch (Exception ex) {}
     }
     
-    public void addLogs(String msg, String time) {
-        String sql = "INSERT INTO logs(message, time) VALUES ('"+msg+"', '"+time+"');";
+    public void addLogs(int user, String msg, String time) {
+        String sql = "INSERT INTO logs(user, message, time) VALUES ("+user+", '"+msg+"', '"+time+"');";
         
         try (Connection conn = DriverManager.getConnection(driverURL);
             Statement stmt = conn.createStatement()){
