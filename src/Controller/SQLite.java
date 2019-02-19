@@ -50,7 +50,7 @@ public class SQLite {
     }
     
     public ArrayList<User> getUsers(){
-        String sql = "SELECT id, username, password, role FROM users";
+        String sql = "SELECT id, username, password, role, lockStatus FROM users";
         ArrayList<User> users = new ArrayList<User>();
         
         try (Connection conn = DriverManager.getConnection(driverURL);
@@ -61,7 +61,8 @@ public class SQLite {
                 users.add(new User(rs.getInt("id"),
                                    rs.getString("username"),
                                    rs.getString("password"),
-                                   rs.getInt("role")));
+                                   rs.getInt("role"),
+                                   rs.getInt("lockStatus")));
             
             }
         } catch (Exception ex) {}
@@ -117,7 +118,7 @@ public class SQLite {
     //kinda weird, not sure if good implementation hahaha. Will change later on if its really bad.
     public int countUsers(){
         
-        String sql = "SELECT id, username, password, role FROM users";
+        String sql = "SELECT id, username, password, role, lockStatus FROM users";
         ArrayList<User> users = new ArrayList<User>();
         
         try (Connection conn = DriverManager.getConnection(driverURL);
@@ -128,7 +129,8 @@ public class SQLite {
                 users.add(new User(rs.getInt("id"),
                                    rs.getString("username"),
                                    rs.getString("password"),
-                                   rs.getInt("role")));
+                                   rs.getInt("role"),
+                                   rs.getInt("lockStatus")));
             
             }
         } catch (Exception ex) {}

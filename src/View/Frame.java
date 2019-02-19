@@ -233,6 +233,29 @@ public class Frame extends javax.swing.JFrame {
         return m.find();
     }
     
+    public boolean isLockedOut(String username){
+        //get list of all users to compare input with credentials
+        ArrayList<User> users = main.sqlite.getUsers();
+        System.out.println("Entered lockout function");
+        //loop through all the users to compare credentials
+        for(User user : users){
+            System.out.println("Entered for loop");
+            //first check if username already exists
+            if(user.getUsername().equals(username)){
+                System.out.println("Found corresponding user value in table: " + user.getUsername());
+                System.out.println("Current lock status: " + user.getLockStatus());
+                //if lock status of user is 1 (true)
+                if(user.getLockStatus() == 1){
+                    System.out.println("USER LOCK STATUS == 1");
+                    return true;
+                }
+            }     
+        }
+        
+        //if user is not locked out
+        return false;        
+    }
+    
     public boolean checkIfUserExists(String username){
              //get list of all users to compare input with credentials
         ArrayList<User> users = main.sqlite.getUsers();
