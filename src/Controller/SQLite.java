@@ -95,8 +95,6 @@ public class SQLite {
             Statement stmt = conn.createStatement()){
             stmt.execute(sql);
             addAttempts();
-            //for testing if addingLogs works
-            //addLogs(1, "test", "now");
             
         } catch (Exception ex) {}        
     }
@@ -110,14 +108,7 @@ public class SQLite {
             System.out.println("User " + username + " has been deleted.");
         } catch (Exception ex) {}
     }
-    
-    //lucia here
-        
-    //end lucia here
 
-    //tadhg here
-
-    //kinda weird, not sure if good implementation hahaha. Will change later on if its really bad.
     public int countUsers(){
         
         String sql = "SELECT id, username, password, role, lockStatus, lockTime FROM users";
@@ -177,10 +168,7 @@ public class SQLite {
         } catch (Exception ex) {
         }
     }
-    
-    //end tadhg here
 
-    //miggy here
     public void createAttemptsTable() {
         String sql = "CREATE TABLE IF NOT EXISTS attempts (\n"
             + " id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
@@ -286,7 +274,5 @@ public class SQLite {
         } catch (Exception ex) {
         }
     }
-
-    //end miggy here
     
 }

@@ -264,7 +264,7 @@ public class Frame extends javax.swing.JFrame {
     }
     
     public boolean checkIfUserExists(String username){
-             //get list of all users to compare input with credentials
+        //get list of all users to compare input with credentials
         ArrayList<User> users = main.sqlite.getUsers();
         
         //loop through all the users to compare credentials
@@ -306,10 +306,6 @@ public class Frame extends javax.swing.JFrame {
         //if inputted username does not match with any of the usernames in the db, then user does not exist
         return 0;
     }
-        
-    //end lucia here
-
-    //tadhg here
     
     //function for checking if account actually exists and if credentials are correct
     //using char[] because jPasswordFields only have the function .getPassword which returns char[]
@@ -379,13 +375,10 @@ public class Frame extends javax.swing.JFrame {
             if(user.getUsername().equals(username)){
                 //found the correct user now check if time has been served
                 if(user.getLockStatus() == 1){
-                    //time from db
-                    System.out.println("this is user lock time: " +user.getLockTime());
+                    //time from database
                     String lockedTime[] = user.getLockTime().split("T");
                     String date = lockedTime[0];
-                    System.out.println("this is date: " +date);
                     String time = lockedTime[1];
-                    System.out.println("this is time: " +time);
                     int year = Integer.parseInt(date.split("-")[0]);
                     int month = Integer.parseInt(date.split("-")[1]);
                     int day = Integer.parseInt(date.split("-")[2]);
@@ -403,11 +396,7 @@ public class Frame extends javax.swing.JFrame {
                     int hrNow = Integer.parseInt(timeNow.split(":")[0]);
                     int minNow = Integer.parseInt(timeNow.split(":")[1]);
 
-
-                    System.out.println("this is the time now: " +localDateTimeCurrent);
-
                     if(year >= yearNow && month >= monthNow && day >= dayNow && hr >= hrNow && (minNow-min) >= 1){
-                        System.out.println("inside long ass if Served yo time");
                         main.sqlite.resetAttempts(username);
                         main.sqlite.changeLockStatus(username, 0);
                         main.sqlite.changeLockTime(username, "");
@@ -419,12 +408,6 @@ public class Frame extends javax.swing.JFrame {
         
         return false;
     }
-
-    //end tadhg here
-
-    //miggy here
-
-    //end miggy here
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Container;

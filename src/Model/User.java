@@ -8,33 +8,9 @@ public class User {
     private int lockStatus;
     private String lockTime;
 
-    //lucia here
-        
-    //end lucia here
-
-    //tadhg here
-
-    //end tadhg here
-
-    //miggy here
-
-    //end miggy here
-
     public User(String username, String password){
         this.username = username;
         this.password = password;
-        
-        //lucia here
-        
-        //end lucia here
-
-        //tadhg here
-
-        //end tadhg here
-
-        //miggy here
-
-        //end miggy here
     }
     
     public User(int id, String username, String password, int role, int lockStatus, String lockTime){
@@ -44,18 +20,6 @@ public class User {
         this.role = role;
         this.lockStatus = lockStatus;
         this.lockTime = lockTime;
-        
-        //lucia here
-        
-        //end lucia here
-
-        //tadhg here
-
-        //end tadhg here
-
-        //miggy here
-
-        //end miggy here
     }
     
     public int getId() {
@@ -105,16 +69,4 @@ public class User {
     public void setLockTime(String lockTime) {
         this.lockTime = lockTime;
     }
-    
-    //lucia here
-        
-    //end lucia here
-
-    //tadhg here
-
-    //end tadhg here
-
-    //miggy here
-
-    //end miggy here
 }

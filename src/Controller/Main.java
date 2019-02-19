@@ -44,18 +44,6 @@ public class Main {
         } 
     }
     
-    //lucia here
-        
-    //end lucia here
-
-    //tadhg here
-
-    //end tadhg here
-
-    //miggy here
-
-    //end miggy here
-    
     public static void main(String[] args) {
         new Main().init();
     }
@@ -95,23 +83,12 @@ public class Main {
             System.out.println(" Role: " + users.get(nCtr).getRole());
         }
         
-        //lucia here
-        
-        //end lucia here
-        
-        //tadhg here
-        
-        //end tadhg here
-        
-        //miggy here
         ArrayList<Attempt> attempts = sqlite.getAttempts();
         System.out.println(attempts.size());
         for(int nCtr = 0; nCtr < attempts.size(); nCtr++){
             System.out.println("===== Attempts for User " + attempts.get(nCtr).getId() + " =====");
             System.out.println(" Tracked failed attempts: " + attempts.get(nCtr).getTrackedFailedAttempts());
         }
-        
-        //end miggy here
         
         // Initialize User Interface
         Frame frame = new Frame();
