@@ -249,6 +249,11 @@ public class Frame extends javax.swing.JFrame {
                 //if lock status of user is 1 (true)
                 if(user.getLockStatus() == 1){
                     System.out.println("USER LOCK STATUS == 1");
+                    
+                    //for logging
+                    String date = "" + LocalDateTime.now();
+                    
+                    main.sqlite.addLogs(user.getId(), "Locked Account", date);
                     return true;
                 }
             }     
