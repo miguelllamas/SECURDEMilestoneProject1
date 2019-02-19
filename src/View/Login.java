@@ -147,6 +147,13 @@ public class Login extends javax.swing.JPanel {
             //Invalid login credentials
            if(frame.isLockedOut(jTextField1.getText()) == true){ //if user exceeded max attempts
                System.out.println("MAX ATTEMPTS");
+               
+               if(frame.hasServedTime(jTextField1.getText()) == true && frame.checkLoginCredentials(jTextField1.getText(), pass)){
+                   //reset attempts table, lockStatus, lockTime in frame
+                   System.out.println("pressed do click");
+                   jButton2.doClick();
+               }
+               
                jLabel2.setText("You have exceeded the maximum number of attempts and you are now locked out of your account. Try again in a minute." );
            }
            else{

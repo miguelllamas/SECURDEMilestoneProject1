@@ -6,7 +6,8 @@ public class User {
     private String password;
     private int role;
     private int lockStatus;
-    
+    private String lockTime;
+
     //lucia here
         
     //end lucia here
@@ -36,12 +37,13 @@ public class User {
         //end miggy here
     }
     
-    public User(int id, String username, String password, int role, int lockStatus){
+    public User(int id, String username, String password, int role, int lockStatus, String lockTime){
         this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
         this.lockStatus = lockStatus;
+        this.lockTime = lockTime;
         
         //lucia here
         
@@ -94,6 +96,14 @@ public class User {
 
     public void setLockStatus(int lockStatus) {
         this.lockStatus = lockStatus;
+    }
+    
+    public String getLockTime() {
+        return lockTime;
+    }
+
+    public void setLockTime(String lockTime) {
+        this.lockTime = lockTime;
     }
     
     //lucia here

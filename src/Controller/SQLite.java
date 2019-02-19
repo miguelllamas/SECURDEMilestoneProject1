@@ -29,7 +29,8 @@ public class SQLite {
             + " username TEXT NOT NULL,\n"
             + " password TEXT NOT NULL,\n"
             + " role INTEGER DEFAULT 2,\n"
-            + " lockStatus INTEGER DEFAULT 0\n"
+            + " lockStatus INTEGER DEFAULT 0,\n"
+            + " lockTime STRING DEFAULT '' \n"
             + ");";
 
         try (Connection conn = DriverManager.getConnection(driverURL);
@@ -50,7 +51,7 @@ public class SQLite {
     }
     
     public ArrayList<User> getUsers(){
-        String sql = "SELECT id, username, password, role, lockStatus FROM users";
+        String sql = "SELECT id, username, password, role, lockStatus, lockTime FROM users";
         ArrayList<User> users = new ArrayList<User>();
         
         try (Connection conn = DriverManager.getConnection(driverURL);
@@ -62,7 +63,8 @@ public class SQLite {
                                    rs.getString("username"),
                                    rs.getString("password"),
                                    rs.getInt("role"),
-                                   rs.getInt("lockStatus")));
+                                   rs.getInt("lockStatus"),
+                                   rs.getString("lockTime")));
             
             }
         } catch (Exception ex) {}
@@ -118,7 +120,7 @@ public class SQLite {
     //kinda weird, not sure if good implementation hahaha. Will change later on if its really bad.
     public int countUsers(){
         
-        String sql = "SELECT id, username, password, role, lockStatus FROM users";
+        String sql = "SELECT id, username, password, role, lockStatus, lockTime FROM users";
         ArrayList<User> users = new ArrayList<User>();
         
         try (Connection conn = DriverManager.getConnection(driverURL);
@@ -130,7 +132,8 @@ public class SQLite {
                                    rs.getString("username"),
                                    rs.getString("password"),
                                    rs.getInt("role"),
-                                   rs.getInt("lockStatus")));
+                                   rs.getInt("lockStatus"),
+                                   rs.getString("lockTime")));
             
             }
         } catch (Exception ex) {}
@@ -267,6 +270,19 @@ public class SQLite {
             Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
             System.out.println("Lock status for " + username + " updated.");
+        } catch (Exception ex) {
+        }
+    }
+    
+    public void changeLockTime(String username, String date){
+        String sql = "UPDATE users\n"
+                + "SET lockTime = '" + date + "'\n"
+                + "WHERE username = '" + username + "';";
+        
+        try (Connection conn = DriverManager.getConnection(driverURL);
+            Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+            System.out.println("Lock time for " + username + " updated.");
         } catch (Exception ex) {
         }
     }
