@@ -253,8 +253,7 @@ public class Frame extends javax.swing.JFrame {
                     //for logging
                     String date = "" + LocalDateTime.now();
                     
-                    main.sqlite.addLogs(user.getId(), "Locked Account", date);
-                    main.sqlite.changeLockTime(user.getUsername(), date);
+                    main.sqlite.addLogs(user.getId(), "Locked Account", date);                    
                     return true;
                 }
             }     
@@ -283,7 +282,8 @@ public class Frame extends javax.swing.JFrame {
     public boolean checkPassword(String password){ //check if password contains correct characters
         if(containsNumber(password) && 
            containsUpperCase(password) && 
-           containsSpecial(password)){
+           containsSpecial(password)&&
+           password.length() >= 8){
             return true;
         }
         
@@ -346,6 +346,7 @@ public class Frame extends javax.swing.JFrame {
                             if(attempt.getId() == user.getId()) {
                                 if(attempt.getTrackedFailedAttempts() == 5) {
                                     main.sqlite.changeLockStatus(user.getUsername(), 1);
+                                    main.sqlite.changeLockTime(user.getUsername(), date);
                                     System.out.println("LOCKED ACCOUNT");
                                 }
                                 else {
@@ -377,41 +378,42 @@ public class Frame extends javax.swing.JFrame {
             //first check if username is the same
             if(user.getUsername().equals(username)){
                 //found the correct user now check if time has been served
-                
-                //time from db
-                System.out.println("this is user lock time: " +user.getLockTime());
-                String lockedTime[] = user.getLockTime().split("T");
-                String date = lockedTime[0];
-                System.out.println("this is date: " +date);
-                String time = lockedTime[1];
-                System.out.println("this is time: " +time);
-                int year = Integer.parseInt(date.split("-")[0]);
-                int month = Integer.parseInt(date.split("-")[1]);
-                int day = Integer.parseInt(date.split("-")[2]);
-                int hr = Integer.parseInt(time.split(":")[0]);
-                int min = Integer.parseInt(time.split(":")[1]);
-                
-                //time now
-                String localDateTimeCurrent = ""+LocalDateTime.now();
-                String TimeNow[] = localDateTimeCurrent.split("T");
-                String dateNow = TimeNow[0];
-                String timeNow = TimeNow[1];
-                int yearNow = Integer.parseInt(dateNow.split("-")[0]);
-                int monthNow = Integer.parseInt(dateNow.split("-")[1]);
-                int dayNow = Integer.parseInt(dateNow.split("-")[2]);
-                int hrNow = Integer.parseInt(timeNow.split(":")[0]);
-                int minNow = Integer.parseInt(timeNow.split(":")[1]);
-                
-                
-                System.out.println("this is the time now: " +localDateTimeCurrent);
-                
-                if(year >= yearNow && month >= monthNow && day >= dayNow && hr >= hrNow && (minNow-min) >= 1){
-                    System.out.println("inside long ass if Served yo time");
-                    main.sqlite.resetAttempts(username);
-                    main.sqlite.changeLockStatus(username, 0);
-                    main.sqlite.changeLockTime(username, "");
+                if(user.getLockStatus() == 1){
+                    //time from db
+                    System.out.println("this is user lock time: " +user.getLockTime());
+                    String lockedTime[] = user.getLockTime().split("T");
+                    String date = lockedTime[0];
+                    System.out.println("this is date: " +date);
+                    String time = lockedTime[1];
+                    System.out.println("this is time: " +time);
+                    int year = Integer.parseInt(date.split("-")[0]);
+                    int month = Integer.parseInt(date.split("-")[1]);
+                    int day = Integer.parseInt(date.split("-")[2]);
+                    int hr = Integer.parseInt(time.split(":")[0]);
+                    int min = Integer.parseInt(time.split(":")[1]);
+
+                    //time now
+                    String localDateTimeCurrent = ""+LocalDateTime.now();
+                    String TimeNow[] = localDateTimeCurrent.split("T");
+                    String dateNow = TimeNow[0];
+                    String timeNow = TimeNow[1];
+                    int yearNow = Integer.parseInt(dateNow.split("-")[0]);
+                    int monthNow = Integer.parseInt(dateNow.split("-")[1]);
+                    int dayNow = Integer.parseInt(dateNow.split("-")[2]);
+                    int hrNow = Integer.parseInt(timeNow.split(":")[0]);
+                    int minNow = Integer.parseInt(timeNow.split(":")[1]);
+
+
+                    System.out.println("this is the time now: " +localDateTimeCurrent);
+
+                    if(year >= yearNow && month >= monthNow && day >= dayNow && hr >= hrNow && (minNow-min) >= 1){
+                        System.out.println("inside long ass if Served yo time");
+                        main.sqlite.resetAttempts(username);
+                        main.sqlite.changeLockStatus(username, 0);
+                        main.sqlite.changeLockTime(username, "");
+                        return true;
+                    }
                 }
-                return true;
             }
         }
         
