@@ -1,6 +1,8 @@
 
 package View;
 
+import java.time.LocalDateTime;
+
 public class Login extends javax.swing.JPanel {
 
     public Frame frame;
@@ -126,7 +128,7 @@ public class Login extends javax.swing.JPanel {
         String pass = new String(jPasswordField1.getPassword());
         
         //if login credentials are valid
-        if(frame.checkLoginCredentials(jTextField1.getText(), pass)){
+        if(frame.checkLoginCredentials(jTextField1.getText(), pass) && frame.isLockedOut(jTextField1.getText()) == false){
             //depending on role, show the corresponding home
             switch(frame.getRole(jTextField1.getText())){
                 case 0: break;
@@ -143,7 +145,14 @@ public class Login extends javax.swing.JPanel {
         }
         else{
             //Invalid login credentials
-            jLabel2.setText("Invalid Credentials");
+           if(frame.isLockedOut(jTextField1.getText()) == true){ //if user exceeded max attempts
+               System.out.println("MAX ATTEMPTS");
+               jLabel2.setText("You have exceeded the maximum number of attempts and you are now locked out of your account. Try again in a minute." );
+           }
+           else{
+               System.out.println("Regular error message");
+               jLabel2.setText("Invalid Credentials");
+           }
         }
         
         

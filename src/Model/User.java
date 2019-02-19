@@ -36,11 +36,12 @@ public class User {
         //end miggy here
     }
     
-    public User(int id, String username, String password, int role){
+    public User(int id, String username, String password, int role, int lockStatus){
         this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
+        this.lockStatus = lockStatus;
         
         //lucia here
         
