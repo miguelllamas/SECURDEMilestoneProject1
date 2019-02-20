@@ -123,7 +123,7 @@ public class Register extends javax.swing.JPanel {
                 .addGap(24, 24, 24)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -132,10 +132,8 @@ public class Register extends javax.swing.JPanel {
                 .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
-
-        jPasswordField1.getAccessibleContext().setAccessibleName("PASSWORD");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -148,13 +146,13 @@ public class Register extends javax.swing.JPanel {
                     frame.loginNav();
                 }  
                 else{
-                    jLabel2.setText("Password Mismatch");
+                    jLabel2.setText("Passwords do not match.");
                 }
             }else{
-                jLabel2.setText("Password must contain at least 1 uppercase letter, lowercase letter, number, special character, and have a minimum length of 8 characters");
+                jLabel2.setText("<html>Password must contain at least 1 uppercase letter, <br/>1 lowercase letter, 1 number, 1 special character, <br/>and have a minimum length of 8 characters.</html>");
             }
         }else{
-            jLabel2.setText("Username alreaedy exists");
+            jLabel2.setText("Username has already been used.");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

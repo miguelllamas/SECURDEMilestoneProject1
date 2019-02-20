@@ -200,7 +200,6 @@ public class SQLite {
             stmt.execute(sql);
             
         } catch (Exception ex) {
-            System.out.println("did this happen?");
         }
     }
     
